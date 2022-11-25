@@ -11,6 +11,8 @@ module.exports = {
       backgroundImage: {
         "hero-pattern": "url('/images/bg-desktop-light.jpg')",
         "hero-pattern-mobile": "url('/images/bg-mobile-light.jpg')",
+        "hero-pattern-dark": "url('/images/bg-desktop-dark.jpg')",
+        "hero-pattern-dark-mobile": "url('/images/bg-mobile-dark.jpg')",
       },
       fontSize: {
         base: "18px",

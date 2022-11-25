@@ -1,18 +1,56 @@
-import React from "react";
+import { useState } from "react";
 import { TabAction } from "../../types";
+import classes from "./TabButton.module.css";
+
+const RadioInput: React.FC<{
+  text: string;
+  groupName: string;
+  selected: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}> = (props) => {
+  return (
+    <li>
+      <input
+        id={`${props.text}_${props.groupName}`}
+        type="radio"
+        name={props.groupName}
+        value={props.text}
+        className={classes.input}
+        checked={props.text === props.selected}
+        onChange={props.onChange}
+      />
+      <label
+        htmlFor={`${props.text}_${props.groupName}`}
+        className={classes.label}
+      >
+        {props.text}
+      </label>
+    </li>
+  );
+};
 
 const index: React.FC<TabAction> = (props) => {
   const className = ["flex flex-row space-x-4"];
   className.push(props.className ?? "");
 
+  const [selected, setSelected] = useState("All");
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelected(e.target.value);
+  };
+
   return (
-    <div className={className.join(" ")}>
-      {props.tabList.map((tab, index) => (
-        <p key={index} className="text-sm font-normal text-dark-grayish-blue-light cursor-pointer hover:text-very-dark-grayish-blue-light">
-          {tab}
-        </p>
+    <ul className={className.join(" ")}>
+      {props.tabList.list.map((tab, index) => (
+        <RadioInput
+          key={index}
+          text={tab}
+          groupName={props.tabList.group}
+          selected={selected}
+          onChange={onChangeHandler}
+        />
       ))}
-    </div>
+    </ul>
   );
 };
 

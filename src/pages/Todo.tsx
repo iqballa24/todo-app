@@ -8,18 +8,23 @@ const Home = () => {
     {
       id: 1,
       title: "Membersihkan tempat tidur",
+      isChecked: true
     },
     {
       id: 2,
       title: "Menyapu kamar",
+      isChecked: false
+
     },
     {
       id: 3,
       title: "Tidur malam selama 8 jam",
+      isChecked: false
     },
     {
       id: 4,
       title: "Ngopi dulu jangan lupa",
+      isChecked: true
     },
   ];
   return (
