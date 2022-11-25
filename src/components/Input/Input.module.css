@@ -1,0 +1,29 @@
+.wrapper {
+  position: relative;
+  filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+}
+
+input[type="text"] {
+  background-color: white;
+  display: inline-block;
+  width: 100%;
+  padding: 1rem 2rem;
+  padding-left: 3.6rem;
+  outline: none;
+  border-radius: 5px;
+}
+
+input[type="text"]:focus + .icon_bullet {
+  border-color: #979797c0;
+}
+
+.icon_bullet {
+  position: absolute;
+  display: inline-block;
+  border: 1px solid #cdcdcd;
+  border-radius: 50%;
+  height: 21px;
+  width: 21px;
+  left: 20px;
+  top: 20px;
+}

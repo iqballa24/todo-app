@@ -1,0 +1,68 @@
+.item_todo {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(180, 177, 177, 0.292);
+  cursor: pointer;
+}
+
+.item_todo .wrapper_input {
+  width: 90%;
+  position: relative;
+  padding: 1rem;
+  padding-left: 3.6rem;
+}
+
+.item_todo .wrapper_input .item_name {
+  width: 90%;
+}
+
+/* input checkbox */
+
+.item_todo .wrapper_input input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  left: 25px;
+  top: 22px;
+}
+
+/* ICON DELETE */
+
+.item_todo .item_delete {
+  flex: 1 1 auto;
+  visibility: visible;
+}
+
+.item_todo:hover .item_delete {
+  visibility: visible;
+}
+
+.item_todo:hover .item_delete:hover {
+  color: red;
+}
+
+/* CHECKMARK */
+
+.checkmark {
+  position: absolute;
+  left: 19px;
+  top: 16px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid #cdcdcd;
+  background-color: transparent;
+}
+
+
+.item_todo .wrapper_input:hover > .checkmark {
+  border-color: #979797c0;
+}
+
+.item_todo .wrapper_input > input:checked + .checkmark{
+  background-image: linear-gradient(to bottom right,hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}

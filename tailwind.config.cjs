@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
@@ -8,6 +8,10 @@ module.exports = {
       serif: ["Merriweather", "serif"],
     },
     extend: {
+      backgroundImage: {
+        "hero-pattern": "url('/images/bg-desktop-light.jpg')",
+        "hero-pattern-mobile": "url('/images/bg-mobile-light.jpg')",
+      },
       fontSize: {
         base: "18px",
       },
