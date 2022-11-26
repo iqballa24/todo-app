@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { LIST_TAB } from "../../../constant";
 import TabButton from "../../TabButton";
 
@@ -6,7 +6,7 @@ const ItemAction: React.FC<{
   itemTotal: number;
   onCompleteHandler: () => void;
 }> = (props) => {
-  const tabList = { group: "tabButton1", list: LIST_TAB };
+  const tabList = useMemo(() => ({ group: "tabButton1", list: LIST_TAB }), []);
   return (
     <Fragment>
       <div className="flex flex-row justify-between p-[1rem] ">

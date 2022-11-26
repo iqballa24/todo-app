@@ -10,7 +10,7 @@ interface Props extends Todos {
 }
 
 const ItemTodo: React.FC<Props> = (props) => {
-  const [isChecked, setIsChecked] = useState<boolean>(true);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const onClickItemTodo = () => {
     setIsChecked((prev) => !prev);
@@ -22,16 +22,16 @@ const ItemTodo: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <li className={classes.item_todo}>
-      <div className={classes.wrapper_input} onClick={onClickItemTodo}>
+    <div className={classes.item_todo}>
+      <div className={classes.wrapper_input}>
         <input
           id={props.id.toString()}
           type="checkbox"
           className={classes.input}
           checked={isChecked}
-          onChange={onClickItemTodo}
+          onChange={() => false}
         />
-        <span className={classes.checkmark}></span>
+        <span className={classes.checkmark} onClick={onClickItemTodo}></span>
         <label className={classes.item_name} htmlFor={props.id.toString()}>
           {props.title}
         </label>
@@ -40,7 +40,7 @@ const ItemTodo: React.FC<Props> = (props) => {
         className={classes.item_delete}
         onClick={props.onRemoveHandler}
       />
-    </li>
+    </div>
   );
 };
 

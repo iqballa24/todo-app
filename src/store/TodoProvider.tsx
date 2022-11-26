@@ -47,6 +47,7 @@ const TodosContextProvider: React.FC<Props> = ({ children }) => {
 
   const contextValue: TodoContextObj = {
     items: todos,
+    setTodos: setTodos,
     filterType: filterType,
     addTodoHandler: addTodoHandler,
     removeTodoHandler: removeTodoHandler,

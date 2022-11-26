@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { TabAction, Todos } from "../../types";
+import { useContext, memo } from "react";
+import { TabAction } from "../../types";
 import classes from "./TabButton.module.css";
 
 import TodosContext from "../../store/todo-context";
@@ -55,4 +55,4 @@ const index: React.FC<TabAction> = (props) => {
   );
 };
 
-export default index;
+export default memo(index);

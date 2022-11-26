@@ -13,6 +13,7 @@ export class Todos {
 export type TodoContextObj = {
   items: Todos[];
   filterType: string;
+  setTodos: (e: any) => void,
   addTodoHandler: (title: string) => void;
   removeTodoHandler: (id: number) => void;
   clearTodoCompleteHandler: () => void;
