@@ -1,34 +1,16 @@
-import React, { useState } from "react";
-import TodosContext from "./todo-context";
+import React, { useState, useEffect } from "react";
 import { Todos, TodoContextObj } from "../types";
+import useTodos from "../hooks/useTodos";
+import TodosContext from "./todo-context";
+import { TODOS_KEY } from "../constant";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const TodosContextProvider: React.FC<Props> = ({ children }) => {
-  const [todos, setTodos] = useState<Todos[]>([
-    {
-      id: 1,
-      title: "Membersihkan tempat tidur",
-      isChecked: true,
-    },
-    {
-      id: 2,
-      title: "Menyapu kamar",
-      isChecked: false,
-    },
-    {
-      id: 3,
-      title: "Tidur malam selama 8 jam",
-      isChecked: false,
-    },
-    {
-      id: 4,
-      title: "Ngopi dulu jangan lupa",
-      isChecked: true,
-    },
-  ]);
+  const { initialTodos, saveToLocalStorage } = useTodos(TODOS_KEY);
+  const [todos, setTodos] = useState<Todos[]>(initialTodos);
   const [filterType, setFilterType] = useState("All");
 
   const addTodoHandler = (title: string) => {
@@ -59,6 +41,10 @@ const TodosContextProvider: React.FC<Props> = ({ children }) => {
     setFilterType(type);
   };
 
+  useEffect(() => {
+    saveToLocalStorage(todos);
+  }, [todos]);
+
   const contextValue: TodoContextObj = {
     items: todos,
     filterType: filterType,
@@ -66,7 +52,7 @@ const TodosContextProvider: React.FC<Props> = ({ children }) => {
     removeTodoHandler: removeTodoHandler,
     clearTodoCompleteHandler: clearCompleteTodoHandler,
     checkTodoHandler: checkTodoHandler,
-    changeTypeFilter: changeTypeFilter
+    changeTypeFilter: changeTypeFilter,
   };
 
   return (

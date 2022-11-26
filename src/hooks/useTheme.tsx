@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
+import { THEME_KEY } from "../constant";
 
-const storedIsDarkTheme = localStorage.getItem("dark");
+const storedIsDarkTheme = localStorage.getItem(THEME_KEY);
 
 export default function useTheme() {
   const [isDark, setIsDark] = useState<boolean>(storedIsDarkTheme === "true");

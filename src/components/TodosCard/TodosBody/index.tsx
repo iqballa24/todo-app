@@ -1,4 +1,5 @@
 import { Fragment, useContext } from "react";
+import { LIST_TAB } from "../../../constant";
 import TodosContext from "../../../store/todo-context";
 
 import ItemTodo from "./ItemTodo";
@@ -8,7 +9,7 @@ import TabButton from "../../TabButton";
 const TodosBody = () => {
   const todosCtx = useContext(TodosContext);
   const { items, filterType } = todosCtx;
-  const tabList = { group: "tabButton2", list: ["All", "Active", "Complete"] };
+  const tabList = { group: "tabButton2", list: LIST_TAB };
 
   const onRemoveHandler = (id: number) => {
     todosCtx.removeTodoHandler(id);
@@ -46,7 +47,7 @@ const TodosBody = () => {
           />
         ))}
         <ItemAction
-          itemTotal={items.length}
+          itemTotal={filterItems.length}
           onCompleteHandler={onClearCompleteTodoHandler}
         />
       </ul>

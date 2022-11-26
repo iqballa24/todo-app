@@ -12,6 +12,7 @@ const Input: React.FC<{ onAddHandler: (e: string) => void }> = (props) => {
   const onSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     onAddHandler(enteredTodo.current!.value);
+    enteredTodo.current!.value = "";
   };
 
   return (
