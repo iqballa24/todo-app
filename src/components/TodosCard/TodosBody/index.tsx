@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState, useEffect, useMemo } from "react";
+import { useContext, useState, useMemo } from "react";
 import { motion, Reorder } from "framer-motion";
 import { LIST_TAB } from "../../../constant";
 import TodosContext from "../../../store/todo-context";
@@ -51,7 +51,7 @@ const TodosBody = () => {
           </Reorder.Item>
         ))}
         <ItemAction
-          itemTotal={filterItems.length}
+          itemTotal={items.filter(filterTodos).length}
           onCompleteHandler={clearTodoCompleteHandler}
         />
       </Reorder.Group>
