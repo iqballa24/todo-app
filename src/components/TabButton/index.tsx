@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { TabAction } from "../../types";
+import { useState, useContext } from "react";
+import { TabAction, Todos } from "../../types";
 import classes from "./TabButton.module.css";
+
+import TodosContext from "../../store/todo-context";
 
 const RadioInput: React.FC<{
   text: string;
@@ -30,13 +32,12 @@ const RadioInput: React.FC<{
 };
 
 const index: React.FC<TabAction> = (props) => {
+  const todosCtx = useContext(TodosContext);
   const className = ["flex flex-row space-x-4"];
   className.push(props.className ?? "");
 
-  const [selected, setSelected] = useState("All");
-
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelected(e.target.value);
+    todosCtx.changeTypeFilter(e.target.value);
   };
 
   return (
@@ -46,7 +47,7 @@ const index: React.FC<TabAction> = (props) => {
           key={index}
           text={tab}
           groupName={props.tabList.group}
-          selected={selected}
+          selected={todosCtx.filterType}
           onChange={onChangeHandler}
         />
       ))}

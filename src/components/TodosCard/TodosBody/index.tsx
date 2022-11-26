@@ -1,26 +1,54 @@
-import React, { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import TodosContext from "../../../store/todo-context";
+
 import ItemTodo from "./ItemTodo";
 import ItemAction from "./ItemAction";
 import TabButton from "../../TabButton";
 
-import { Todos } from "../../../types";
-
-const TodosBody: React.FC<Todos> = (props) => {
-  const { data } = props;
+const TodosBody = () => {
+  const todosCtx = useContext(TodosContext);
+  const { items, filterType } = todosCtx;
   const tabList = { group: "tabButton2", list: ["All", "Active", "Complete"] };
+
+  const onRemoveHandler = (id: number) => {
+    todosCtx.removeTodoHandler(id);
+  };
+
+  const onClearCompleteTodoHandler = () => {
+    todosCtx.clearTodoCompleteHandler();
+  };
+
+  const onCheckTodoHandler = (id: number) => {
+    todosCtx.checkTodoHandler(id);
+  };
+
+  let filterItems = [];
+
+  if (filterType === "Active") {
+    filterItems = items.filter((item) => !item.isChecked);
+  } else if (filterType === "Complete") {
+    filterItems = items.filter((item) => item.isChecked);
+  } else {
+    filterItems = [...items];
+  }
 
   return (
     <Fragment>
       <ul className="rounded-md bg-white dark:bg-very-dark-desaturated-blue drop-shadow-2xl">
-        {data.map((item) => (
+        {filterItems.map((item) => (
           <ItemTodo
             key={item.id}
             title={item.title}
             id={item.id}
             isChecked={item.isChecked}
+            onRemoveHandler={onRemoveHandler.bind(null, item.id)}
+            onCheckHandler={onCheckTodoHandler.bind(null, item.id)}
           />
         ))}
-        <ItemAction itemTotal={data.length} />
+        <ItemAction
+          itemTotal={items.length}
+          onCompleteHandler={onClearCompleteTodoHandler}
+        />
       </ul>
       <TabButton
         tabList={tabList}

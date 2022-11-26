@@ -2,36 +2,24 @@ import { useEffect, useState } from "react";
 import { IoMoonSharp } from "react-icons/io5";
 import { HiSun } from "react-icons/hi";
 
+import useTheme from "../../hooks/useTheme";
+
 const SwitchToggler = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const { isDark, changeTheme } = useTheme();
 
-  useEffect(() => {
-    if (isDarkTheme) {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-    }
-  }, [isDarkTheme]);
-
-  const onClickSwitchTheme = () => {
-    setIsDarkTheme((prev) => !prev);
-  };
-
-  const iconSwitch = isDarkTheme ? (
+  const iconSwitch = isDark ? (
     <HiSun
       color="white"
       className="cursor-pointer"
-      size={24}
-      onClick={onClickSwitchTheme}
+      size={28}
+      onClick={changeTheme}
     />
   ) : (
     <IoMoonSharp
       color="white"
       className="cursor-pointer"
-      size={24}
-      onClick={onClickSwitchTheme}
+      size={28}
+      onClick={changeTheme}
     />
   );
 

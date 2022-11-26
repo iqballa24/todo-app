@@ -1,13 +1,20 @@
 import { memo, useEffect, useState } from "react";
 import { GiTireIronCross } from "react-icons/gi";
 import classes from "./ItemTodo.module.css";
-import { TodoItem } from "../../../types";
 
-const ItemTodo: React.FC<TodoItem> = (props) => {
+import { Todos } from "../../../types";
+
+interface Props extends Todos {
+  onRemoveHandler: () => void;
+  onCheckHandler: () => void;
+}
+
+const ItemTodo: React.FC<Props> = (props) => {
   const [isChecked, setIsChecked] = useState<boolean>(true);
 
   const onClickItemTodo = () => {
     setIsChecked((prev) => !prev);
+    props.onCheckHandler();
   };
 
   useEffect(() => {
@@ -29,7 +36,10 @@ const ItemTodo: React.FC<TodoItem> = (props) => {
           {props.title}
         </label>
       </div>
-      <GiTireIronCross className={classes.item_delete} />
+      <GiTireIronCross
+        className={classes.item_delete}
+        onClick={props.onRemoveHandler}
+      />
     </li>
   );
 };
