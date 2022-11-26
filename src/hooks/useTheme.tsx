@@ -12,11 +12,13 @@ export default function useTheme() {
 
   useEffect(() => {
     if (!storedIsDarkTheme) {
-      localStorage.setItem("dark", "false");
+      localStorage.setItem("dark", "true");
+      setIsDark(true);
     }
   }, []);
 
   useEffect(() => {
+    console.log(isDark);
     if (isDark) {
       document.documentElement.classList.remove("light");
       document.documentElement.classList.add("dark");
