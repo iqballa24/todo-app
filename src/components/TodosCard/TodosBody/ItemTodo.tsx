@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { GiTireIronCross } from "react-icons/gi";
 import classes from "./ItemTodo.module.css";
 
@@ -31,7 +32,11 @@ const ItemTodo: React.FC<Props> = (props) => {
           checked={isChecked}
           onChange={() => false}
         />
-        <span className={classes.checkmark} onClick={onClickItemTodo}></span>
+        <motion.span
+          whileTap={{ scale: 0.8 }}
+          className={classes.checkmark}
+          onClick={onClickItemTodo}
+        ></motion.span>
         <label className={classes.item_name} htmlFor={props.id.toString()}>
           {props.title}
         </label>

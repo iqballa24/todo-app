@@ -1,5 +1,5 @@
-import { useContext, useState, useMemo } from "react";
-import { motion, Reorder } from "framer-motion";
+import { Fragment, useContext, useState, useMemo } from "react";
+import { AnimatePresence, Reorder } from "framer-motion";
 import { LIST_TAB } from "../../../constant";
 import TodosContext from "../../../store/todo-context";
 
@@ -32,24 +32,32 @@ const TodosBody = () => {
   };
 
   return (
-    <motion.div initial={false} transition={{ layout: { duration: 0.3 } }}>
+    <Fragment>
       <Reorder.Group
         axis="y"
         values={items}
         onReorder={filterType === "All" ? todosCtx.setTodos : setFilterItems}
         className="rounded-md bg-white dark:bg-very-dark-desaturated-blue drop-shadow-2xl"
       >
-        {items.filter(filterTodos).map((item) => (
-          <Reorder.Item key={item.id} value={item}>
-            <ItemTodo
-              title={item.title}
-              id={item.id}
-              isChecked={item.isChecked}
-              onRemoveHandler={removeTodoHandler.bind(null, item.id)}
-              onCheckHandler={checkTodoHandler.bind(null, item.id)}
-            />
-          </Reorder.Item>
-        ))}
+        <AnimatePresence>
+          {items.filter(filterTodos).map((item) => (
+            <Reorder.Item
+              key={item.id}
+              value={item}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <ItemTodo
+                title={item.title}
+                id={item.id}
+                isChecked={item.isChecked}
+                onRemoveHandler={removeTodoHandler.bind(null, item.id)}
+                onCheckHandler={checkTodoHandler.bind(null, item.id)}
+              />
+            </Reorder.Item>
+          ))}
+        </AnimatePresence>
         <ItemAction
           itemTotal={items.filter(filterTodos).length}
           onCompleteHandler={clearTodoCompleteHandler}
@@ -59,7 +67,7 @@ const TodosBody = () => {
         tabList={tabList}
         className="bg-white dark:bg-very-dark-desaturated-blue mt-8 justify-center p-[1rem] shadow-2xl z-10 rounded-md md:hidden"
       />
-    </motion.div>
+    </Fragment>
   );
 };
 
